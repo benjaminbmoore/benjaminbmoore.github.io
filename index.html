@@ -173,6 +173,13 @@ article{padding-top:32px!important;padding-bottom:32px!important}
 }
 .nav a.brand::after{display:none}
 a[x-apple-data-detectors],a[href^="tel:"]{color:inherit!important;text-decoration:none!important;font:inherit!important;pointer-events:none}
+.cin{font:inherit;font-size:17px;font-weight:400;color:#FFFFFF;background:rgba(255,255,255,.06);border:1px solid rgba(201,214,238,.35);border-radius:10px;padding:13px 14px;outline:none;transition:border-color .2s ease,background .2s ease;resize:vertical}
+.cin:hover{border-color:rgba(201,214,238,.6)}
+.cin:focus{border-color:#7DA2F5;background:rgba(255,255,255,.1);box-shadow:0 0 0 3px rgba(125,162,245,.35)}
+.cbtn{font:inherit;font-weight:600;font-size:17px;color:#0B1B3A;background:#FFFFFF;border:0;border-radius:999px;padding:14px 28px;min-height:48px;cursor:pointer;transition:transform .2s ease,background .2s ease}
+.cbtn:hover{background:#E6ECF5;transform:translateY(-1px)}
+.cbtn:focus-visible{outline:3px solid #7DA2F5;outline-offset:3px}
+.cbtn[disabled]{opacity:.6;cursor:default;transform:none}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes muralPar{to{transform:translateY(90px)}}
 @keyframes panelPar{to{transform:translateY(-30px)}}
@@ -361,7 +368,7 @@ a[x-apple-data-detectors],a[href^="tel:"]{color:inherit!important;text-decoratio
 <div class="fade" style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); border-top: 1px solid #0B1B3A; animation-delay: 2.4s">
 <div style="padding: 20px 20px 0 0"><div class="lab" style="color: #5A616B">Focus</div><div style="font-weight: 600">Strategy, capital, governance</div></div>
 <div style="padding: 20px 20px 0 0"><div class="lab" style="color: #5A616B">Scope</div><div style="font-weight: 600">International growth</div></div>
-<div style="padding: 20px 20px 0 0"><div class="lab" style="color: #5A616B">Contact</div><div style="font-weight: 600"><a href="https://www.linkedin.com/in/benjaminbmoore/">LinkedIn ↗</a> · <a href="mailto:hello@benjaminmoore.co.nz">Email ↗</a></div></div>
+<div style="padding: 20px 20px 0 0"><div class="lab" style="color: #5A616B">Contact</div><div style="font-weight: 600"><a href="https://www.linkedin.com/in/benjaminbmoore/">LinkedIn ↗</a> · <a href="#contact">Message ↓</a></div></div>
 </div>
 </section>
 
@@ -656,12 +663,23 @@ a[x-apple-data-detectors],a[href^="tel:"]{color:inherit!important;text-decoratio
 <div style="position: relative; max-width: 1320px; margin: 0 auto; padding: 120px 32px 48px; box-sizing: border-box">
 <span class="lab" style="color: #9DB4E0">05 · Contact</span>
 <h2 class="disp wipe-up" style="margin: 24px 0 0; font-weight: 700; font-size: clamp(40px, 7vw, 112px); line-height: 1.08; letter-spacing: -0.04em">Let’s build<br>what’s next.</h2>
-<div class="reveal" style="margin-top: 64px; display: flex; flex-wrap: wrap; gap: 24px 64px; align-items: flex-end; justify-content: space-between">
-<p style="margin: 0; max-width: 480px; font-size: 20px; color: rgba(255,255,255,.92)">Open to conversations with boards, founders and leadership teams building growth organisations.</p>
-<div style="display: flex; flex-direction: column; gap: 12px; font-size: clamp(22px, 2.2vw, 30px); font-weight: 600">
-<a href="mailto:hello@benjaminmoore.co.nz" class="big-link" style="color: #FFFFFF; padding: 4px 0">Email ↗</a>
-<a href="https://www.linkedin.com/in/benjaminbmoore/" class="big-link" style="color: #FFFFFF; padding: 4px 0">LinkedIn ↗</a>
+<div class="reveal" style="margin-top: 64px; display: flex; flex-wrap: wrap; gap: 40px 72px; align-items: flex-start; justify-content: space-between">
+<div style="flex: 1 1 320px; max-width: 480px; display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0; font-size: 20px; color: rgba(255,255,255,.92)">Open to conversations with boards, founders and leadership teams building growth organisations.</p>
+<p style="margin: 0; font-size: 18px; color: rgba(255,255,255,.8)">Send me a message and I’ll reply by email. Or find me on <a href="https://www.linkedin.com/in/benjaminbmoore/" class="big-link" style="color: #FFFFFF; font-weight: 600">LinkedIn ↗</a></p>
 </div>
+<form class="cform" action="https://formspree.io/f/xaeobknp" method="POST" style="flex: 1 1 420px; max-width: 620px; display: flex; flex-direction: column; gap: 18px">
+<div class="crow" style="display: flex; flex-wrap: wrap; gap: 18px">
+<label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600; color: #C9D6EE">Name<input class="cin" type="text" name="name" autocomplete="name" required></label>
+<label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600; color: #C9D6EE">Email<input class="cin" type="email" name="email" autocomplete="email" required></label>
+</div>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600; color: #C9D6EE">Message<textarea class="cin" name="message" rows="5" required></textarea></label>
+<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px">
+<button type="submit" class="cbtn">Send message</button>
+<p class="cstatus" role="status" aria-live="polite" style="margin: 0; font-size: 16px; color: #C9D6EE"></p>
+</div>
+</form>
 </div>
 <div class="ft" aria-hidden="true" style="position: relative; margin: 72px -32px 0; aspect-ratio: 1200 / 420"><svg viewBox="0 0 1200 420" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible"><path class="ft-line" pathLength="1" d="M-20,285.0 C260,285.0 400,315.6 600,309.6 S1060,285.6 1200,14.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 23% cover 53%"></path><path class="ft-line" pathLength="1" d="M-20,295.0 C260,295.0 400,317.0 600,311.0 S1060,290.0 1200,33.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 20% cover 50%"></path><path class="ft-line" pathLength="1" d="M-20,305.0 C260,305.0 400,318.4 600,312.4 S1060,294.4 1200,52.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 17% cover 47%"></path><path class="ft-line" pathLength="1" d="M-20,315.0 C260,315.0 400,319.8 600,313.8 S1060,298.8 1200,71.0" fill="none" stroke="#7DA2F5" stroke-width="2.6" stroke-linecap="round" style="animation-range: entry 14% cover 44%"></path><path class="ft-line" pathLength="1" d="M-20,325.0 C260,325.0 400,321.2 600,315.2 S1060,303.2 1200,90.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 11% cover 41%"></path><path class="ft-line" pathLength="1" d="M-20,335.0 C260,335.0 400,322.6 600,316.6 S1060,307.6 1200,109.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 8% cover 38%"></path><path class="ft-line" pathLength="1" d="M-20,345.0 C260,345.0 400,324.0 600,318.0 S1060,312.0 1200,128.0" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" style="animation-range: entry 5% cover 35%"></path><path class="ft-line" pathLength="1" d="M-20,355.0 C260,355.0 400,325.4 600,319.4 S1060,316.4 1200,147.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 8% cover 38%"></path><path class="ft-line" pathLength="1" d="M-20,365.0 C260,365.0 400,326.8 600,320.8 S1060,320.8 1200,166.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 11% cover 41%"></path><path class="ft-line" pathLength="1" d="M-20,375.0 C260,375.0 400,328.2 600,322.2 S1060,325.2 1200,185.0" fill="none" stroke="#7DA2F5" stroke-width="2.6" stroke-linecap="round" style="animation-range: entry 14% cover 44%"></path><path class="ft-line" pathLength="1" d="M-20,385.0 C260,385.0 400,329.6 600,323.6 S1060,329.6 1200,204.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 17% cover 47%"></path><path class="ft-line" pathLength="1" d="M-20,395.0 C260,395.0 400,331.0 600,325.0 S1060,334.0 1200,223.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 20% cover 50%"></path><path class="ft-line" pathLength="1" d="M-20,405.0 C260,405.0 400,332.4 600,326.4 S1060,338.4 1200,242.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 23% cover 53%"></path><path class="ft-pulse" pathLength="1" d="M-20,295.0 C260,295.0 400,317.0 600,311.0 S1060,290.0 1200,33.0" fill="none" stroke="#BFD2FF" stroke-width="4.5" stroke-linecap="round" style="animation-delay: 0.55s; animation-duration: 5.0s"></path><path class="ft-pulse" pathLength="1" d="M-20,315.0 C260,315.0 400,319.8 600,313.8 S1060,298.8 1200,71.0" fill="none" stroke="#BFD2FF" stroke-width="4.5" stroke-linecap="round" style="animation-delay: 1.65s; animation-duration: 6.6s"></path><path class="ft-pulse" pathLength="1" d="M-20,345.0 C260,345.0 400,324.0 600,318.0 S1060,312.0 1200,128.0" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" style="animation-delay: 3.30s; animation-duration: 5.8s"></path><path class="ft-pulse" pathLength="1" d="M-20,375.0 C260,375.0 400,328.2 600,322.2 S1060,325.2 1200,185.0" fill="none" stroke="#BFD2FF" stroke-width="4.5" stroke-linecap="round" style="animation-delay: 4.95s; animation-duration: 5.0s"></path><path class="ft-pulse" pathLength="1" d="M-20,395.0 C260,395.0 400,331.0 600,325.0 S1060,334.0 1200,223.0" fill="none" stroke="#BFD2FF" stroke-width="4.5" stroke-linecap="round" style="animation-delay: 6.05s; animation-duration: 6.6s"></path><circle class="ft-dot" cx="600" cy="318" r="7" fill="#0B1B3A" stroke="#FFFFFF" stroke-width="2"></circle><circle class="ft-dot" cx="1200" cy="71.0" r="5" fill="#7DA2F5"></circle><circle class="ft-dot" cx="1200" cy="128.0" r="5" fill="#FFFFFF"></circle><circle class="ft-dot" cx="1200" cy="185.0" r="5" fill="#7DA2F5"></circle></svg></div>
 <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.3); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; font-weight: 600; color: rgba(255,255,255,.88)">
@@ -674,6 +692,19 @@ a[x-apple-data-detectors],a[href^="tel:"]{color:inherit!important;text-decoratio
 </div>
 <script>
 (function () {
+  var form = document.querySelector('.cform');
+  if (form) form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var status = form.querySelector('.cstatus'), btn = form.querySelector('.cbtn');
+    btn.disabled = true; status.textContent = 'Sending…';
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+      .then(function (res) {
+        if (res.ok) { form.reset(); status.textContent = 'Thanks. Your message is on its way.'; }
+        else { status.textContent = 'That didn’t send. Please try again.'; }
+      })
+      .catch(function () { status.textContent = 'That didn’t send. Please check your connection and try again.'; })
+      .then(function () { btn.disabled = false; });
+  });
   var tog = document.getElementById('navtog');
   document.querySelectorAll('.nav-links a').forEach(function (a) {
     a.addEventListener('click', function () { if (tog) tog.checked = false; });
