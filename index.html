@@ -132,6 +132,28 @@ a{color:#0B1B3A}a:hover{color:#1D4ED8}
 @keyframes navName{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
 .wipe,.wipe-up{padding-bottom:.14em;margin-bottom:-.06em}
 h1.disp,h2.disp{padding-bottom:.06em}
+.nav-tog{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.nav-btn{display:none}
+@media (max-width:760px){
+.nav{padding-top:10px!important;padding-bottom:10px!important}
+.nav-btn{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;margin-left:auto;cursor:pointer;border-radius:10px}
+.nav-btn span{display:block;width:22px;height:2px;margin:0 auto;background:#0B1B3A;border-radius:2px;transition:transform .3s ease,opacity .3s ease}
+.nav-tog:focus-visible+.nav-btn{outline:2px solid #1D4ED8;outline-offset:2px}
+.nav-tog:checked+.nav-btn span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-tog:checked+.nav-btn span:nth-child(2){opacity:0}
+.nav-tog:checked+.nav-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-links{display:none!important;flex-basis:100%;flex-direction:column;gap:0!important;padding:6px 0 10px;border-top:1px solid #D5DCE7}
+.nav-links a{padding:12px 0!important;font-size:18px}
+.nav-tog:checked~.nav-links{display:flex!important}
+}
+.scroll-cue{display:inline-flex;align-items:center;gap:10px;margin-top:clamp(36px, 4.5vw, 64px);font-size:15px;font-weight:600;color:#5A616B;text-decoration:none;animation:fadeIn 1s ease 3.2s both}
+.scroll-cue:hover{color:#0B1B3A}
+.scroll-cue .chev{display:inline-block}
+@keyframes cueBob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+@keyframes cueOut{to{opacity:0}}
+@media (min-width:761px){.nav-links a{transition:color .3s ease}.nav-links a.active{color:#1D4ED8}.nav-links a.active::after{transform:scaleX(1);transform-origin:left}}
+.ft-pulse{stroke-dasharray:.045 .955;stroke-dashoffset:1;animation:hsPulse 5s linear infinite both;filter:drop-shadow(0 0 4px rgba(191,210,255,.7))}
+.ft-dot{transform-box:fill-box;transform-origin:center}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes muralPar{to{transform:translateY(90px)}}
 @keyframes panelPar{to{transform:translateY(-30px)}}
@@ -221,6 +243,10 @@ h1.disp,h2.disp{padding-bottom:.06em}
 .la{animation:laPar linear both;animation-timeline:scroll();animation-range:0px 900px}
 .lb{animation:lbPar linear both;animation-timeline:scroll();animation-range:0px 900px}
 .nav-name{animation:navName linear both;animation-timeline:--hero;animation-range:exit 55% exit 85%}
+.scroll-cue{animation:fadeIn 1s ease 3.2s both,cueOut linear both;animation-timeline:auto,scroll();animation-range:normal,0px 220px}
+.ft{view-timeline-name:--ft}
+.ft-line{stroke-dasharray:1;animation:drawP linear both;animation-timeline:--ft}
+.ft-dot{animation:hsEnd linear both;animation-timeline:--ft;animation-range:cover 35% cover 45%}
 .merge{view-timeline-name:--mg}
 .seg{animation:segIn linear both;animation-timeline:--mg}
 .sg1{animation-range:entry 30% cover 30%}.sg2{animation-range:entry 45% cover 36%}.sg3{animation-range:entry 60% cover 42%}.sg4{animation-range:entry 75% cover 48%}
@@ -284,7 +310,9 @@ h1.disp,h2.disp{padding-bottom:.06em}
 <header style="position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.88); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid #0B1B3A">
 <nav class="nav" aria-label="Main" style="max-width: 1320px; margin: 0 auto; padding: 18px 32px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 32px; font-weight: 600; font-size: 15px">
 <a href="#top" aria-label="Benjamin Moore, back to top" style="display: inline-flex; align-items: center; gap: 12px; min-height: 44px; text-decoration: none; color: #0B1B3A"><span aria-hidden="true" style="flex: 0 0 auto; width: 14px; height: 14px; border-radius: 50%; background: #1D4ED8"></span><span class="nav-name disp" style="font-weight: 700; font-size: 17px; letter-spacing: -0.01em; white-space: nowrap">Benjamin Moore</span></a>
-<div style="display: flex; flex-wrap: wrap; gap: 4px 28px">
+<input type="checkbox" id="navtog" class="nav-tog" aria-label="Open menu">
+<label for="navtog" class="nav-btn" aria-hidden="true"><span></span><span></span><span></span></label>
+<div class="nav-links" style="display: flex; flex-wrap: wrap; gap: 4px 28px">
 <a href="#profile" style="padding: 10px 0">Profile</a>
 <a href="#competencies" style="padding: 10px 0">Competencies</a>
 <a href="#experience" style="padding: 10px 0">Experience</a>
@@ -304,6 +332,7 @@ h1.disp,h2.disp{padding-bottom:.06em}
 <span aria-hidden="true" class="role-yr" style="display: inline-block"><span class="outline"><span class="ch" style="animation-delay: 0.750s">M</span><span class="ch" style="animation-delay: 0.820s">o</span><span class="ch" style="animation-delay: 0.890s">o</span><span class="ch" style="animation-delay: 0.960s">r</span><span class="ch" style="animation-delay: 1.030s">e</span></span><span class="fillwipe">Moore</span></span>
 </h1>
 <p class="fade" style="margin: 28px 0 0; max-width: 760px; font-size: clamp(24px, 2.3vw, 32px); font-weight: 600; line-height: 1.25; letter-spacing: -0.015em; animation-delay: 1.3s">Executive leader for growth organisations.<br>Chief Strategy Officer at <a href="https://jnctn-inc.com" style="color: #1D4ED8; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px">JNCTN</a>.</p>
+<a href="#profile" class="scroll-cue"><span class="chev" aria-hidden="true">↓</span>Scroll for more</a>
 </div>
 <figure class="portrait" style="flex: 0 0 auto; width: clamp(180px, 22vw, 300px); margin: 0; aspect-ratio: 1">
 <div class="p-blob" style="width: 100%; height: 100%; overflow: hidden; border-radius: 50%; background: #E6ECF5">
@@ -602,11 +631,9 @@ h1.disp,h2.disp{padding-bottom:.06em}
 </section>
 
 <section id="contact" style="position: relative; overflow: hidden; background: #0B1B3A; color: #FFFFFF">
-<span class="spin-in" aria-hidden="true" style="position: absolute; right: -120px; top: -120px; width: 460px; height: 460px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.22); box-sizing: border-box"></span>
-<span class="spin-in" aria-hidden="true" style="position: absolute; left: 8%; bottom: -60px; width: 180px; height: 180px; background: rgba(110,139,196,0.18); clip-path: polygon(50% 0, 100% 100%, 0 100%)"></span>
-<div style="position: relative; max-width: 1320px; margin: 0 auto; padding: 140px 32px 56px; box-sizing: border-box">
+<div style="position: relative; max-width: 1320px; margin: 0 auto; padding: 120px 32px 48px; box-sizing: border-box">
 <span class="lab" style="color: #9DB4E0">05 · Contact</span>
-<h2 class="disp wipe-up" style="margin: 24px 0 0; font-weight: 700; font-size: clamp(44px, 11vw, 180px); line-height: 1.08; letter-spacing: -0.045em">Let’s build<br>what’s next.</h2>
+<h2 class="disp wipe-up" style="margin: 24px 0 0; font-weight: 700; font-size: clamp(40px, 7vw, 112px); line-height: 1.08; letter-spacing: -0.04em">Let’s build<br>what’s next.</h2>
 <div class="reveal" style="margin-top: 64px; display: flex; flex-wrap: wrap; gap: 24px 64px; align-items: flex-end; justify-content: space-between">
 <p style="margin: 0; max-width: 480px; font-size: 20px; color: rgba(255,255,255,.92)">Open to conversations with boards, founders and leadership teams building growth organisations.</p>
 <div style="display: flex; flex-direction: column; gap: 12px; font-size: clamp(22px, 2.2vw, 30px); font-weight: 600">
@@ -614,7 +641,8 @@ h1.disp,h2.disp{padding-bottom:.06em}
 <a href="https://www.linkedin.com/in/benjaminbmoore/" class="big-link" style="color: #FFFFFF; padding: 4px 0">LinkedIn ↗</a>
 </div>
 </div>
-<div style="margin-top: 112px; padding-top: 20px; border-top: 2px solid rgba(255,255,255,.3); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; font-weight: 600; color: rgba(255,255,255,.88)">
+<div class="ft" aria-hidden="true" style="position: relative; margin: 72px -32px 0; aspect-ratio: 1200 / 420"><svg viewBox="0 0 1200 420" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible"><path class="ft-line" pathLength="1" d="M-20,285.0 C260,285.0 400,315.6 600,309.6 S1060,285.6 1200,14.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 23% cover 53%"></path><path class="ft-line" pathLength="1" d="M-20,295.0 C260,295.0 400,317.0 600,311.0 S1060,290.0 1200,33.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 20% cover 50%"></path><path class="ft-line" pathLength="1" d="M-20,305.0 C260,305.0 400,318.4 600,312.4 S1060,294.4 1200,52.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 17% cover 47%"></path><path class="ft-line" pathLength="1" d="M-20,315.0 C260,315.0 400,319.8 600,313.8 S1060,298.8 1200,71.0" fill="none" stroke="#7DA2F5" stroke-width="2.6" stroke-linecap="round" style="animation-range: entry 14% cover 44%"></path><path class="ft-line" pathLength="1" d="M-20,325.0 C260,325.0 400,321.2 600,315.2 S1060,303.2 1200,90.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 11% cover 41%"></path><path class="ft-line" pathLength="1" d="M-20,335.0 C260,335.0 400,322.6 600,316.6 S1060,307.6 1200,109.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 8% cover 38%"></path><path class="ft-line" pathLength="1" d="M-20,345.0 C260,345.0 400,324.0 600,318.0 S1060,312.0 1200,128.0" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" style="animation-range: entry 5% cover 35%"></path><path class="ft-line" pathLength="1" d="M-20,355.0 C260,355.0 400,325.4 600,319.4 S1060,316.4 1200,147.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 8% cover 38%"></path><path class="ft-line" pathLength="1" d="M-20,365.0 C260,365.0 400,326.8 600,320.8 S1060,320.8 1200,166.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 11% cover 41%"></path><path class="ft-line" pathLength="1" d="M-20,375.0 C260,375.0 400,328.2 600,322.2 S1060,325.2 1200,185.0" fill="none" stroke="#7DA2F5" stroke-width="2.6" stroke-linecap="round" style="animation-range: entry 14% cover 44%"></path><path class="ft-line" pathLength="1" d="M-20,385.0 C260,385.0 400,329.6 600,323.6 S1060,329.6 1200,204.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 17% cover 47%"></path><path class="ft-line" pathLength="1" d="M-20,395.0 C260,395.0 400,331.0 600,325.0 S1060,334.0 1200,223.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 20% cover 50%"></path><path class="ft-line" pathLength="1" d="M-20,405.0 C260,405.0 400,332.4 600,326.4 S1060,338.4 1200,242.0" fill="none" stroke="#2E4A80" stroke-width="1.3" stroke-linecap="round" style="animation-range: entry 23% cover 53%"></path><path class="ft-pulse" pathLength="1" d="M-20,295.0 C260,295.0 400,317.0 600,311.0 S1060,290.0 1200,33.0" fill="none" stroke="#BFD2FF" stroke-width="4.5" stroke-linecap="round" style="animation-delay: 0.55s; animation-duration: 5.0s"></path><path class="ft-pulse" pathLength="1" d="M-20,315.0 C260,315.0 400,319.8 600,313.8 S1060,298.8 1200,71.0" fill="none" stroke="#BFD2FF" stroke-width="4.5" stroke-linecap="round" style="animation-delay: 1.65s; animation-duration: 6.6s"></path><path class="ft-pulse" pathLength="1" d="M-20,345.0 C260,345.0 400,324.0 600,318.0 S1060,312.0 1200,128.0" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" style="animation-delay: 3.30s; animation-duration: 5.8s"></path><path class="ft-pulse" pathLength="1" d="M-20,375.0 C260,375.0 400,328.2 600,322.2 S1060,325.2 1200,185.0" fill="none" stroke="#BFD2FF" stroke-width="4.5" stroke-linecap="round" style="animation-delay: 4.95s; animation-duration: 5.0s"></path><path class="ft-pulse" pathLength="1" d="M-20,395.0 C260,395.0 400,331.0 600,325.0 S1060,334.0 1200,223.0" fill="none" stroke="#BFD2FF" stroke-width="4.5" stroke-linecap="round" style="animation-delay: 6.05s; animation-duration: 6.6s"></path><circle class="ft-dot" cx="600" cy="318" r="7" fill="#0B1B3A" stroke="#FFFFFF" stroke-width="2"></circle><circle class="ft-dot" cx="1200" cy="71.0" r="5" fill="#7DA2F5"></circle><circle class="ft-dot" cx="1200" cy="128.0" r="5" fill="#FFFFFF"></circle><circle class="ft-dot" cx="1200" cy="185.0" r="5" fill="#7DA2F5"></circle></svg></div>
+<div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.3); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; font-weight: 600; color: rgba(255,255,255,.88)">
 <span>© 2026 Benjamin Moore</span>
 <span>Executive leader · Growth organisations</span>
 </div>
@@ -622,5 +650,35 @@ h1.disp,h2.disp{padding-bottom:.06em}
 </section>
 
 </div>
+<script>
+(function () {
+  var tog = document.getElementById('navtog');
+  document.querySelectorAll('.nav-links a').forEach(function (a) {
+    a.addEventListener('click', function () { if (tog) tog.checked = false; });
+  });
+  var map = { profile: 'profile', competencies: 'competencies', regulated: 'competencies', remit: 'competencies', disciplines: 'experience', experience: 'experience', approach: 'approach', education: 'education', contact: 'contact' };
+  var links = {};
+  document.querySelectorAll('.nav-links a[href^="#"]').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  function setActive(key) {
+    Object.keys(links).forEach(function (k) {
+      var on = k === key;
+      links[k].classList.toggle('active', on);
+      if (on) links[k].setAttribute('aria-current', 'true'); else links[k].removeAttribute('aria-current');
+    });
+  }
+  var order = ['top','profile','competencies','regulated','remit','disciplines','experience','approach','education','contact'];
+  var raf = null;
+  function update() {
+    var line = window.innerHeight * 0.35, current = null;
+    order.forEach(function (id) { var el = document.getElementById(id); if (el && el.getBoundingClientRect().top <= line) current = id; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = 'contact';
+    setActive(current ? (map[current] || null) : null);
+  }
+  function onScroll() { if (!raf) raf = requestAnimationFrame(function () { raf = null; update(); }); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+</script>
 </body>
 </html>
