@@ -39,6 +39,34 @@
   window.addEventListener('resize', onScroll);
   update();
   (function () {
+    if (!document.getAnimations) return;
+    var VT = typeof ViewTimeline !== 'undefined' ? ViewTimeline : null;
+    if (!VT) return;
+    var PROPS = ['opacity', 'transform', 'translate', 'scale', 'rotate', 'clipPath', 'strokeDashoffset', 'filter', 'backgroundColor', 'borderColor'];
+    var done = new WeakSet();
+    function norm(v) { return (v === 'none' || v === 'matrix(1, 0, 0, 1, 0, 0)' || v === 'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)') ? 'none' : v; }
+    function keepLive(el) { return el && el.closest && el.closest('.nav-name, .scroll-cue, .progress, .la, .lb, .mural'); }
+    function freeze() {
+      document.getAnimations().forEach(function (anim) {
+        if (done.has(anim) || !anim.effect || !anim.timeline || !(anim.timeline instanceof VT)) return;
+        var target = anim.effect.target, pseudo = anim.effect.pseudoElement || null;
+        if (keepLive(target)) return;
+        var t = anim.effect.getComputedTiming();
+        if (t.progress === null || t.progress < 0.999) return;
+        var snap = null;
+        if (!pseudo) { var b = getComputedStyle(target); snap = PROPS.map(function (k) { return b[k]; }); }
+        done.add(anim);
+        anim.cancel();
+        if (snap) { var a = getComputedStyle(target); PROPS.forEach(function (k, i) { if (norm(a[k]) !== norm(snap[i])) target.style[k] = snap[i]; }); }
+      });
+    }
+    var fr = null;
+    function onF() { if (!fr) fr = requestAnimationFrame(function () { fr = null; freeze(); }); }
+    window.addEventListener('scroll', onF, { passive: true });
+    window.addEventListener('resize', onF);
+    setTimeout(freeze, 400);
+  })();
+  (function () {
     var hero = document.getElementById('top');
     var paths = Array.prototype.slice.call(document.querySelectorAll('.hs-flex'));
     var node = document.querySelector('.hs-node');
